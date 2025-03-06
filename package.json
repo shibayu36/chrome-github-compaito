@@ -12,6 +12,11 @@
     "typings": "typings install"
   },
   "devDependencies": {
+    "@types/chai": "^5.2.0",
+    "@types/chrome": "^0.0.308",
+    "@types/es6-shim": "^0.31.45",
+    "@types/mocha": "^10.0.10",
+    "@types/sinon": "^17.0.4",
     "browserify": "^13.0.1",
     "chai": "^3.5.0",
     "es6-promise": "^2.0.1",
