@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Wed Jun 29 2016 20:47:11 GMT+0900 (JST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,8 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/**/*.ts',
-      'test/**/*.html'
+      { pattern: 'node_modules/mock-local-storage/lib/mock-localstorage.js', watched: false },
+      { pattern: 'test/**/*.ts', type: 'js' },
+      { pattern: 'test/**/*.html', type: 'html' }
     ],
 
     // list of files to exclude
@@ -27,6 +28,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'node_modules/mock-local-storage/lib/mock-localstorage.js': ['browserify'],
       'test/**/*.ts': ['browserify'],
       'test/**/*.html': ['html2js']
     },
@@ -70,12 +72,6 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity,
-
-    client: {
-      mocha: {
-        require: [require.resolve('mock-local-storage')]
-      }
-    },
 
     browserify: {
       extensions: ['.ts'],

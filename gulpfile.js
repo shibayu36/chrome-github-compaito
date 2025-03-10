@@ -1,17 +1,17 @@
-var gulp       = require('gulp'),
+var gulp = require('gulp'),
     browserify = require('browserify'),
-    watchify   = require('watchify'),
-    tsify      = require('tsify'),
-    editJson   = require('gulp-json-editor'),
-    less       = require('gulp-less'),
-    pug        = require('gulp-pug'),
-    zip        = require('gulp-zip'),
-    logger     = require('gulp-logger'),
-    gutil      = require('gulp-util'),
-    source     = require('vinyl-source-stream'),
-    path       = require('path'),
-    exec       = require('child_process').exec,
-    Promise    = require('es6-promise').Promise;
+    watchify = require('watchify'),
+    tsify = require('tsify'),
+    editJson = require('gulp-json-editor'),
+    less = require('gulp-less'),
+    pug = require('gulp-pug'),
+    zip = require('gulp-zip'),
+    logger = require('gulp-logger'),
+    gutil = require('gulp-util'),
+    source = require('vinyl-source-stream'),
+    path = require('path'),
+    exec = require('child_process').exec,
+    Promise = require('es6-promise').Promise;
 
 function buildScript(entry, watch) {
     let bundler = browserify({
@@ -24,7 +24,7 @@ function buildScript(entry, watch) {
     function rebundle() {
         return bundler
             .bundle()
-            .on('error', function(error) {
+            .on('error', function (error) {
                 gutil.log(error.toString());
                 this.emit('end');
             })
@@ -58,21 +58,21 @@ function buildScript(entry, watch) {
 
 var targets = [
     {
-        name:  'content',
+        name: 'content',
         entry: './src/content.ts'
     },
     {
-        name:  'background',
+        name: 'background',
         entry: './src/background.ts'
     },
     {
-        name:  'options',
+        name: 'options',
         entry: './src/options.ts'
     }
 ];
 for (let t of targets) {
     gulp.task(`${t.name}-browserify`, () => { return buildScript(t.entry, false); });
-    gulp.task(`${t.name}-watchify`,   () => { return buildScript(t.entry, true);  });
+    gulp.task(`${t.name}-watchify`, () => { return buildScript(t.entry, true); });
 }
 gulp.task('typescript', gulp.parallel(targets.map(t => `${t.name}-browserify`)));
 gulp.task('typescript:watch', gulp.parallel(targets.map(t => `${t.name}-watchify`)));
@@ -98,20 +98,20 @@ gulp.task('img', () => {
 });
 
 gulp.task('manifest', () => {
-    return version().then(function(version) {
+    return version().then(function (version) {
         return gulp.src('src/manifest.json')
-            .pipe(editJson({ version : version }))
+            .pipe(editJson({ version: version }))
             .pipe(gulp.dest('app/'))
             .pipe(logger({ beforeEach: '[manifest] wrote: ' }));
     });
 });
 function version() {
-    var promise = new Promise(function(resolve, reject) {
-        exec('git describe --tags --always --dirty', function(err, stdout, stderr) {
+    var promise = new Promise(function (resolve, reject) {
+        exec('git describe --tags --always --dirty', function (err, stdout, stderr) {
             return err ? reject(err) : resolve(stdout);
         });
     });
-    return promise.then(function(desc) {
+    return promise.then(function (desc) {
         var version = desc.replace(/\n$/, '')
             .replace(/-(\d+)/, '.$1')
             .replace(/-g[0-9a-f]+/, '')
@@ -123,7 +123,7 @@ function version() {
 gulp.task('build', gulp.parallel(['typescript', 'less', 'pug', 'img', 'manifest']));
 
 gulp.task('zip', () => {
-    return version().then(function(version) {
+    return version().then(function (version) {
         return gulp.src('app/**/*')
             .pipe(zip('compaito-' + version + '.zip'))
             .pipe(gulp.dest('releases'));
@@ -133,8 +133,8 @@ gulp.task('zip', () => {
 gulp.task('package', gulp.series('build', 'zip'));
 
 gulp.task('watch', gulp.parallel(['typescript:watch', () => {
-    gulp.watch('src/**/*.less',     gulp.parallel(['less']));
-    gulp.watch('src/**/*.pug',      gulp.parallel(['pug']));
+    gulp.watch('src/**/*.less', gulp.parallel(['less']));
+    gulp.watch('src/**/*.pug', gulp.parallel(['pug']));
     gulp.watch('src/manifest.json', gulp.parallel(['manifest']));
 }]));
 
