@@ -15,7 +15,6 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: 'node_modules/mock-local-storage/lib/mock-localstorage.js', watched: false },
       { pattern: 'test/**/*.ts', type: 'js' },
       { pattern: 'test/**/*.html', type: 'html' }
     ],
@@ -28,7 +27,6 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'node_modules/mock-local-storage/lib/mock-localstorage.js': ['browserify'],
       'test/**/*.ts': ['browserify'],
       'test/**/*.html': ['html2js']
     },
