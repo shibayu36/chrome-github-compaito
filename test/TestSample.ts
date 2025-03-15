@@ -13,7 +13,7 @@ describe('TestSampleTarget', () => {
 
 describe('TestSampleWithHtml', () => {
     beforeEach(() => {
-        document.body.innerHTML = __html__['test/TestSample.html'];
+        document.body.innerHTML = '<div class="js-test-sample"><div>';
     });
 
     it('add attribute `data-test`', () => {

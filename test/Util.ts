@@ -4,7 +4,15 @@ import { Util } from '../src/components/Util';
 
 describe('Util', () => {
     beforeEach(() => {
-        document.body.innerHTML = __html__['test/Util.html'];
+        document.body.innerHTML = `
+<div class="outer">
+  <div class="inner">
+    <a class="a" href="#">link a</a>
+    <a class="b" href="#">link b</a>
+  </div>
+  <div class="b"></div>
+<div>
+`;
     });
 
     describe('addClasses', () => {
