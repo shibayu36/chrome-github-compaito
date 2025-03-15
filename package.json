@@ -29,7 +29,6 @@
     "karma": "^6.4.2",
     "karma-browserify": "^8.1.0",
     "karma-chai": "^0.1.0",
-    "karma-html2js-preprocessor": "^1.1.0",
     "karma-jsdom-launcher": "^16.0.0",
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",

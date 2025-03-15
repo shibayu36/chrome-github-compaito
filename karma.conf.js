@@ -16,7 +16,6 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       { pattern: 'test/**/*.ts', type: 'js' },
-      { pattern: 'test/**/*.html', type: 'html' }
     ],
 
     // list of files to exclude
@@ -28,7 +27,6 @@ module.exports = function (config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'test/**/*.ts': ['browserify'],
-      'test/**/*.html': ['html2js']
     },
 
 
